@@ -1,0 +1,39 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title text-center">Login</h3>
+                    <form #loginForm="ngForm" (ngSubmit)="onSubmit(loginForm)">
+                        <!-- Email Field -->
+                        <div class="form-group mb-3">
+                            <label for="email">Email address</label>
+                            <input type="email" id="email" name="email" class="form-control" required ngModel
+                                #email="ngModel" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$">
+                            <div *ngIf="email.invalid && email.touched" class="text-danger">
+                                <small *ngIf="email?.errors?.['required']">Email is required.</small>
+                                <small *ngIf="email?.errors?.['pattern']">Invalid email format.</small>
+                            </div>
+                        </div>
+
+                        <!-- Password Field -->
+                        <div class="form-group mb-3">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" name="password" class="form-control" required minlength="5" maxlength="10" ngModel
+                                #password="ngModel">
+                            <div *ngIf="password.invalid && password.touched" class="text-danger">
+                                <small>Password is required.</small>
+                            </div>
+                        </div>
+                        <!-- Submit Button -->
+                        <button type="submit" class="btn btn-primary w-100"
+                            >Submit</button>
+                    </form>
+                    <h5 class="text-center mt-3">Don't have an account? <a [routerLink]="['/register']">Register</a></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- [disabled]="loginForm.invalid" -->

@@ -1,0 +1,41 @@
+<div class="container mt-5">
+    <h3>Your Cart</h3>
+
+    <!-- If the cart is empty -->
+    <div *ngIf="isEmptyCart()" class="alert alert-warning">
+        Your cart is empty.
+    </div>
+
+    <!-- If the cart has items -->
+    <div *ngIf="!isEmptyCart()">
+        <div *ngFor="let item of cartItems">
+            <div class="row mb-3">
+                <div class="col-md-4">
+                    <img [src]="item.product.images[0]" style="height: 10rem;" [alt]="item.product.title">
+                </div>
+                <div class="col-md-4">
+                    <p class="fw-bolder">{{ item.product.title }} - {{ item.product.brand }}</p>
+                    <p class="text-success fw-bold">{{ item.product.price | currency }}</p>
+                </div>
+                <div class="col-md-2  align-items-center">
+                    <button class="btn btn-sm btn-secondary" (click)="changeQuantity(item, -1)"
+                        [disabled]="item.quantity === 1">-</button>
+                    <span class="mx-2">{{ item.quantity }}</span>
+                    <button class="btn btn-sm btn-secondary" (click)="changeQuantity(item, 1)"
+                        [disabled]="item.quantity === item.product.stock">+</button>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-danger btn-sm" (click)="handleRemove(item) ">Remove</button>
+                </div>
+            </div>  
+
+            <hr>
+        </div>
+    </div>
+
+    <div class="row mt-4">
+        <div class="col-md-8">
+            <h5>Total: {{ getTotal() | currency }}</h5>
+        </div>
+    </div>
+</div>

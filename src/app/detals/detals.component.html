@@ -1,0 +1,55 @@
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <img [src]="productDetails.images[0]" class="card-img-top" [alt]="productDetails.title">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h2 class="card-title fw-bold my-2">{{ productDetails.title }}</h2>
+                    <p class="card-text">{{ productDetails.description }}</p>
+                    <div>
+                        <span *ngFor="let star of getStars(); let i = index">
+                            <i class="fa"
+                                [ngClass]="i < productDetails.rating ? 'fa-star text-success' : 'fa-star-o'"></i>
+                        </span>
+                    </div>
+                    <hr>
+                    <h3 class="card-text fw-bolder"> {{ productDetails.price }}$</h3>
+                    <hr>
+                    <span
+                        [ngClass]="{'badge bg-danger text-white  rounded-pill': productDetails.stock === 0, 'badge bg-success': productDetails.stock > 0}">
+                        {{ productDetails.stock > 0 ? 'In stock' : 'Out of stock' }}
+                    </span>
+                    <h5>More information</h5>
+                    <p class="card-text">Brand: {{ productDetails.brand }}</p>
+                    <p class="card-text">Category: {{ productDetails.category }}</p>
+                    <p class="card-text">Rating: {{ productDetails.rating }}</p>
+                    <p class="card-text">Reviews: {{ productDetails.reviews.length }}</p>
+                    <hr>
+                    <div class="d-flex align-items-center">
+
+                        
+
+                        <span class="ms-3 text-warning" *ngIf="productDetails.stock > 0">Only {{ productDetails.stock }}
+                            Items Left! Don't miss
+                            it</span>
+                        <span class="ms-3 text-danger" *ngIf="productDetails.stock === 0">Out of Stock!</span>
+                    </div>
+
+                    <div class="mt-3">
+                        <button class="btn btn-success" [disabled]="productDetails.stock === 0">Buy Now</button>
+                        <button class="btn btn-outline-success mt-2 ms-2" [disabled]="productDetails.stock === 0"
+                            (click)="addToCart(productDetails)">
+                            Add to cart
+                        </button>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>

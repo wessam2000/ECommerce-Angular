@@ -1,0 +1,78 @@
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h3 class="card-title text-center">Register</h3>
+                    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+                        <div class="form-group mb-3">
+                            <label for="email">Email address</label>
+                            <input type="email" id="email" formControlName="email" class="form-control" >
+
+                            <div *ngIf="email && email.invalid &&  email.touched" class="text-danger">
+                                <small *ngIf="email?.errors?.['required']">Email is required.</small>
+                                <small *ngIf="email?.errors?.['email']">Invalid email format.</small>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="name">Name</label>
+                            <input type="text" id="name" formControlName="name" class="form-control" >
+
+                            <div *ngIf="name && name.invalid &&  name.touched" class="text-danger">
+                                <small *ngIf="name?.errors?.['required']">Name is required.</small>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="username">Username</label>
+                            <input type="text" id="username" formControlName="username" class="form-control" >
+
+                            <div *ngIf="username && username.invalid &&  username.touched"
+                                class="text-danger">
+                                <small *ngIf="username?.errors?.['required']">Username is required.</small>
+                                <small *ngIf="username?.errors?.['pattern']">Username must not contain spaces.</small>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="password">Password</label>
+                            <input type="password" id="password" formControlName="password" class="form-control"
+                                required>
+
+                            <div *ngIf="password && password.invalid &&  password.touched"
+                                class="text-danger">
+                                <small *ngIf="password?.errors?.['required']">Password is required.</small>
+                                <small *ngIf="password?.errors?.['pattern']">
+                                    Password must contain at least one uppercase, one lowercase, one digit, and one
+                                    special character, and be at least 8 characters long.
+                                </small>
+                            </div>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label for="confirmPassword">Confirm Password</label>
+                            <input type="password" id="confirmPassword" formControlName="confirmPassword"
+                                class="form-control" required>
+
+                            <div *ngIf="confirmPassword && confirmPassword.invalid &&  confirmPassword.touched"
+                                class="text-danger">
+                                <small *ngIf="confirmPassword?.errors?.['required']">Confirm Password is
+                                    required.</small>
+                                <small *ngIf="confirmPassword?.errors?.['mustMatch']">Passwords must match.</small>
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary w-100"
+                            >Register</button>
+                    </form>
+                    <h5 class="text-center mt-3">Already have an account? <a routerLink="/login">Login</a></h5>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- [disabled]="registerForm.invalid" -->

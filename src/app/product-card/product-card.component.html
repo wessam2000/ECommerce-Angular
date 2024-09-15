@@ -1,0 +1,29 @@
+<div class="card mt-3" style="width: 22rm" >
+    <img [src]="product.images[0]" class="card-img-top" style="height: 200px;" alt="Product Image">
+    <div class="card-body">
+        <h5 class="card-title">{{ product.title }}</h5>
+        <p class="card-text"> Price: {{ product.price | currency }}
+            <span *ngIf="product.discountPercentage > 0" class="text-success">
+                (-{{ product.discountPercentage }}% Discount)
+              </span>
+        </p>
+        <p class="card-text">
+            <span
+                [ngClass]="{'badge bg-danger text-white  rounded-pill': product.stock === 0, 'badge bg-success': product.stock > 0}">
+                {{ product.stock > 0 ? 'In stock' : 'Out of stock' }}
+            </span>
+        </p>
+        <div>
+            <span *ngFor="let star of getStars(); let i = index">
+                <i  [ngClass]="i < product.rating ? 'fa fa-star text-success' : 'fa-regular fa-star text-success'"></i>
+            </span>
+        </div>
+        <button class="btn btn-outline-primary mt-2" [disabled]="product.stock === 0"
+            (click)="redirectToDetails(product.id)">Details</button>
+            <button class="btn btn-outline-success mt-2 ms-2" 
+        [disabled]="product.stock === 0" 
+        (click)="addToCart(product)">
+  Add to cart
+</button>
+    </div>
+</div>
